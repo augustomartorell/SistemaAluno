@@ -17,6 +17,7 @@ public class DetalhesAlunoDto {
     private String telefone;
     private LocalDate dtNascimento;
     private int idade;
+    private String nomeUsuario;
 
     public DetalhesAlunoDto(Aluno aluno) {
         this.id = aluno.getId();
@@ -28,6 +29,7 @@ public class DetalhesAlunoDto {
         this.dtNascimento = aluno.getDtNascimento();
         this.idade = (int) ChronoUnit.YEARS.between(this.dtNascimento,
                                                     LocalDate.now(ZoneId.of("America/Sao_Paulo")));
+        this.nomeUsuario = aluno.getNomeUsuario();
 
     }
 
@@ -61,5 +63,9 @@ public class DetalhesAlunoDto {
 
     public int getIdade() {
         return idade;
+    }
+
+    public String getNomeUsuario() {
+        return nomeUsuario;
     }
 }

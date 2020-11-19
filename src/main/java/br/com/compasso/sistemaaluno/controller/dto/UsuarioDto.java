@@ -15,6 +15,10 @@ public class UsuarioDto {
         this.senha = usuario.getSenha();
     }
 
+    public static Page<UsuarioDto> converter(Page<Usuario> usuarios) {
+        return usuarios.map(UsuarioDto::new);
+    }
+
     public Long getId() {
         return id;
     }
@@ -37,9 +41,5 @@ public class UsuarioDto {
 
     public void setSenha(String senha) {
         this.senha = senha;
-    }
-
-    public static Page<UsuarioDto> converer(Page<Usuario> usuarios) {
-        return usuarios.map(UsuarioDto::new);
     }
 }

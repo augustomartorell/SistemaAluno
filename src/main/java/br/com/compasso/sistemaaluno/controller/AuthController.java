@@ -2,10 +2,9 @@ package br.com.compasso.sistemaaluno.controller;
 
 import br.com.compasso.sistemaaluno.config.security.TokenService;
 import br.com.compasso.sistemaaluno.controller.dto.TokenDto;
-import br.com.compasso.sistemaaluno.controller.dto.UsuarioDto;
 import br.com.compasso.sistemaaluno.controller.form.LoginForm;
-import br.com.compasso.sistemaaluno.controller.form.UsuarioForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 @RestController
@@ -38,6 +36,8 @@ public class AuthController {
         try {
             Authentication auth = authManager.authenticate(login);
             String token = tokenService.gerarToken(auth);
+            HttpHeaders headers = new HttpHeaders();
+            headers.setBearerAuth(token);
             return ResponseEntity.ok(new TokenDto(token,
                                                   "Bearer"));
         } catch (AuthenticationException e) {

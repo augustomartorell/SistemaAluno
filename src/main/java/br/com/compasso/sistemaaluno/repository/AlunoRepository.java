@@ -11,5 +11,6 @@ interface AlunoRepository
     Page<Aluno> findByNomeAlunoContaining(String nomeAluno,
                                           Pageable paginacao);
 
-//    Page<Aluno> findByNomeUsuarioContaining(String nomeUsuario, Pageable paginacao);
+    Page<Aluno> findByNomeUsuarioContaining(String nomeUsuario,
+                                            Pageable paginacao);
 }

@@ -13,6 +13,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -31,9 +32,18 @@ public class AlunosController {
 
     @GetMapping
     @Cacheable(value = "ListaDeAlunos")
-    @ApiOperation(value = "Consulta todos os alunos ou consulta os com nome similar ao enviado por parametro")
+
+    @ApiOperation(value = "Retorna lista de alunos",
+                  notes = "Pode retorna lista de alunos selecionados pelos parâmetros nomeAluno ou nomeUsuario",
+                  response = AlunoDto.class,
+                  produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "")
+            @ApiResponse(code = 500,
+                         message = "Server error"),
+            @ApiResponse(code = 404,
+                         message = "Não há registros localizados."),
+            @ApiResponse(code = 200,
+                         message = "Ok")
     })
     public Page<AlunoDto> lista(
             @RequestParam(required = false)
@@ -44,18 +54,19 @@ public class AlunosController {
                     Pageable paginacao) {
 
         Page<Aluno> alunos;
-        if (nomeAluno == null) {
-            alunos = alunoRepository.findAll(paginacao);
-        } else {
-            alunos = alunoRepository.findByNomeAlunoContaining(nomeAluno,
+        if (nomeAluno != null) alunos = alunoRepository.findByNomeAlunoContaining(nomeAluno,
+                                                                                  paginacao);
+        else if (nomeUsuario != null)
+            alunos = alunoRepository.findByNomeUsuarioContaining(nomeUsuario,
                                                                paginacao);
-        }
+        else alunos = alunoRepository.findAll(paginacao);
         return AlunoDto.converter(alunos);
     }
 
     @GetMapping("/{id}")
-    @ApiOperation(value = "Traz aluno selecionado pelo seu ID",
-                  response = Aluno.class)
+    @ApiOperation(value = "Detalha aluno",
+                  notes = "Traz detalhes do aluno",
+                  response = DetalhesAlunoDto.class)
     public ResponseEntity<DetalhesAlunoDto> detalhar(
             @PathVariable
                     Long id) {
@@ -67,8 +78,20 @@ public class AlunosController {
 
     @PostMapping
     @Transactional
-    @CacheEvict(value = "ListaDeAlunos",
+    @CacheEvict(value = "CadastraAluno",
                 allEntries = true)
+    @ApiOperation(value = "Cadastra Aluno",
+                  notes = "Cadastra novo aluno a base de dados",
+                  response = AlunoDto.class,
+                  produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiResponses(value = {
+            @ApiResponse(code = 500,
+                         message = "Server error"),
+            @ApiResponse(code = 403,
+                         message = "Acesso não autorizado."),
+            @ApiResponse(code = 200,
+                         message = "Aluno cadastrado")
+    })
     public ResponseEntity<AlunoDto> cadastrar(
             @RequestBody
             @Valid AlunoForm form,
@@ -79,6 +102,7 @@ public class AlunosController {
         URI uri = uriBuilder.path("/alunos/{id}")
                             .buildAndExpand(aluno.getId())
                             .toUri();
+
         return ResponseEntity.created(uri)
                              .body(new AlunoDto(aluno));
     }
@@ -87,6 +111,20 @@ public class AlunosController {
     @Transactional
     @CacheEvict(value = "ListaDeAlunos",
                 allEntries = true)
+    @ApiOperation(value = "Atualiza aluno",
+                  notes = "Atualiza dados do aluno pelo id selecionado",
+                  response = AlunoDto.class,
+                  produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiResponses(value = {
+            @ApiResponse(code = 500,
+                         message = "Server error"),
+            @ApiResponse(code = 403,
+                         message = "Acesso não autorizado."),
+            @ApiResponse(code = 404,
+                         message = "Não há registros localizados."),
+            @ApiResponse(code = 200,
+                         message = "Ok")
+    })
     public ResponseEntity<AlunoDto> atualizar(
             @PathVariable
                     Long id,
@@ -98,9 +136,9 @@ public class AlunosController {
             Aluno aluno = form.atualizar(id,
                                          alunoRepository);
             alunoRepository.save(aluno);
-            return ResponseEntity.ok(new AlunoDto(aluno));
+            return ResponseEntity.ok()
+                                 .body(new AlunoDto(aluno));
         }
-
         return ResponseEntity.notFound()
                              .build();
     }
@@ -109,14 +147,29 @@ public class AlunosController {
     @Transactional
     @CacheEvict(value = "ListaDeAlunos",
                 allEntries = true)
-    public ResponseEntity<?> remover(
+    @ApiOperation(value = "Remove aluno",
+                  notes = "Remove aluno da base dados pelo id selecionado.",
+                  response = String.class,
+                  produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiResponses(value = {
+            @ApiResponse(code = 500,
+                         message = "Server error"),
+            @ApiResponse(code = 403,
+                         message = "Acesso não autorizado."),
+            @ApiResponse(code = 404,
+                         message = "Não há registros localizados."),
+            @ApiResponse(code = 200,
+                         message = "Aluno removido com sucesso.")
+    })
+    public ResponseEntity<String> remover(
             @PathVariable
                     Long id) {
         Optional<Aluno> alunoOptional = alunoRepository.findById(id);
         if (alunoOptional.isPresent()) {
             alunoRepository.deleteById(id);
-            return ResponseEntity.ok()
-                                 .build();
+            String nome = alunoOptional.get()
+                                       .getNomeAluno();
+            return ResponseEntity.ok("Aluno " + nome + " removido.");
         }
 
         return ResponseEntity.notFound()
