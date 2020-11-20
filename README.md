@@ -1,4 +1,4 @@
-# projetos
+# Sistema Aluno
 Sistema de Cadastro, consulta, atualização e remoção de registro de alunos.
 
 ##Utilização
