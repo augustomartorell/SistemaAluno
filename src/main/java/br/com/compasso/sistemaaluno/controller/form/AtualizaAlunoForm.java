@@ -4,7 +4,6 @@ import br.com.compasso.sistemaaluno.modelo.Aluno;
 import br.com.compasso.sistemaaluno.repository.AlunoRepository;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotEmpty;

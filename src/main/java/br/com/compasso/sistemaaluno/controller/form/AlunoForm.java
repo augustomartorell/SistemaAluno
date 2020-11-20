@@ -2,11 +2,11 @@ package br.com.compasso.sistemaaluno.controller.form;
 
 import br.com.compasso.sistemaaluno.modelo.Aluno;
 import br.com.compasso.sistemaaluno.modelo.Sexo;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 public class AlunoForm {
@@ -20,19 +20,18 @@ public class AlunoForm {
 
     @NotNull
     @NotEmpty
-    @Size(min = 11,
-          max = 11)
+    @Length(min = 11,
+            max = 11)
     private String cpf;
 
     @NotNull
     @NotEmpty
-    @Size(min = 10,
+    @Length(min = 10,
           max = 254)
     private String email;
 
-    @Size(min = 8)
+    @Length(min = 8)
     private String telefone;
-
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dtNascimento;
 

@@ -11,11 +11,11 @@ public class ErroFormularioDto {
         this.erro = erro;
     }
 
-    public void setCampo(String campo) {
-        this.campo = campo;
+    public String getCampo() {
+        return campo;
     }
 
-    public void setErro(String erro) {
-        this.erro = erro;
+    public String getErro() {
+        return erro;
     }
 }
