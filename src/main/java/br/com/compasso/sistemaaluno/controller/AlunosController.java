@@ -5,8 +5,11 @@ import br.com.compasso.sistemaaluno.controller.dto.DetalhesAlunoDto;
 import br.com.compasso.sistemaaluno.controller.form.AlunoForm;
 import br.com.compasso.sistemaaluno.controller.form.AtualizaAlunoForm;
 import br.com.compasso.sistemaaluno.modelo.Aluno;
+import br.com.compasso.sistemaaluno.modelo.Sexo;
 import br.com.compasso.sistemaaluno.repository.AlunoRepository;
-import io.swagger.annotations.*;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -58,7 +61,7 @@ public class AlunosController {
                                                                                   paginacao);
         else if (nomeUsuario != null)
             alunos = alunoRepository.findByNomeUsuarioContaining(nomeUsuario,
-                                                               paginacao);
+                                                                 paginacao);
         else alunos = alunoRepository.findAll(paginacao);
         return AlunoDto.converter(alunos);
     }
@@ -165,11 +168,15 @@ public class AlunosController {
             @PathVariable
                     Long id) {
         Optional<Aluno> alunoOptional = alunoRepository.findById(id);
+        String msgRetorno;
         if (alunoOptional.isPresent()) {
+            Aluno aluno = alunoOptional.get();
+            Sexo sexo = aluno.getSexo();
+            String nome = aluno.getNomeAluno();
+            if (sexo == Sexo.FEMININO) msgRetorno = "Aluna " + nome + " removida.";
+            else msgRetorno = "Aluno " + nome + " removido.";
             alunoRepository.deleteById(id);
-            String nome = alunoOptional.get()
-                                       .getNomeAluno();
-            return ResponseEntity.ok("Aluno " + nome + " removido.");
+            return ResponseEntity.ok(msgRetorno);
         }
 
         return ResponseEntity.notFound()
