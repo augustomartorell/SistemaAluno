@@ -50,7 +50,7 @@ public class AlunosController {
                     String nomeAluno,
             @RequestParam(required = false)
                     String nomeUsuario,
-            @PageableDefault(sort = "nomeAluno")
+            @PageableDefault(sort = "id")
                     Pageable paginacao) {
 
         Page<Aluno> alunos;
