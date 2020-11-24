@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="02467361-69d9-4ebf-84f0-88fcb20fcb28" name="Default Changelist" comment="">
+    <list default="true" id="02467361-69d9-4ebf-84f0-88fcb20fcb28" name="Default Changelist" comment="Adicionado tratamento de gênero na mensagem de remoção de cadastro.">
+      <change beforePath="$PROJECT_DIR$/sistemaaluno.iws" beforeDir="false" afterPath="$PROJECT_DIR$/sistemaaluno.iws" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/compasso/sistemaaluno/controller/AlunosController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/compasso/sistemaaluno/controller/AlunosController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -120,7 +121,9 @@
       <workItem from="1605804174605" duration="9121000" />
       <workItem from="1605889970064" duration="5516000" />
       <workItem from="1605898259939" duration="615000" />
-      <workItem from="1606149956099" duration="864000" />
+      <workItem from="1606149956099" duration="1054000" />
+      <workItem from="1606151347669" duration="1356000" />
+      <workItem from="1606223793541" duration="725000" />
     </task>
     <task id="LOCAL-00001" summary="Finalizado atividade, adicionado documentação aos métodos e modelos.">
       <created>1605812454029</created>
@@ -150,7 +153,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606150320386</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Adicionado tratamento de gênero na mensagem de remoção de cadastro.">
+      <created>1606150963220</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1606150963220</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -176,7 +186,8 @@
     <MESSAGE value="Editado README." />
     <MESSAGE value="Arrumado class de ErroFormularioDto, estava com setters invez de ou getters." />
     <MESSAGE value="alterado ordenação de /alunos, para ID" />
-    <option name="LAST_COMMIT_MESSAGE" value="alterado ordenação de /alunos, para ID" />
+    <MESSAGE value="Adicionado tratamento de gênero na mensagem de remoção de cadastro." />
+    <option name="LAST_COMMIT_MESSAGE" value="Adicionado tratamento de gênero na mensagem de remoção de cadastro." />
   </component>
   <component name="WindowStateProjectService">
     <state x="794" y="294" key="#Project_Structure" timestamp="1605812274785">
@@ -203,10 +214,10 @@
       <screen x="68" y="0" width="2492" height="1440" />
     </state>
     <state x="1044" y="466" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/68.0.2492.1440/2560.-155.1080.1920@68.0.2492.1440" timestamp="1605551473208" />
-    <state x="939" y="288" key="CommitChangelistDialog2" timestamp="1606150319680">
+    <state x="939" y="288" key="CommitChangelistDialog2" timestamp="1606155411661">
       <screen x="68" y="0" width="2492" height="1440" />
     </state>
-    <state x="939" y="288" key="CommitChangelistDialog2/68.0.2492.1440/2560.-155.1080.1920@68.0.2492.1440" timestamp="1606150319680" />
+    <state x="939" y="288" key="CommitChangelistDialog2/68.0.2492.1440/2560.-155.1080.1920@68.0.2492.1440" timestamp="1606155411661" />
     <state x="427" y="126" key="DiffContextDialog" timestamp="1605895464900">
       <screen x="68" y="0" width="2492" height="1440" />
     </state>
@@ -215,38 +226,38 @@
       <screen x="68" y="0" width="2492" height="1440" />
     </state>
     <state x="1094" y="474" key="FileChooserDialogImpl/68.0.2492.1440/2560.-155.1080.1920@68.0.2492.1440" timestamp="1605291617486" />
-    <state width="2449" height="410" key="GridCell.Tab.0.bottom" timestamp="1606150404590">
+    <state width="2449" height="410" key="GridCell.Tab.0.bottom" timestamp="1606223897133">
       <screen x="68" y="0" width="2492" height="1440" />
     </state>
-    <state width="2449" height="410" key="GridCell.Tab.0.bottom/68.0.2492.1440/2560.-155.1080.1920@68.0.2492.1440" timestamp="1606150404590" />
-    <state width="2449" height="410" key="GridCell.Tab.0.center" timestamp="1606150404589">
+    <state width="2449" height="410" key="GridCell.Tab.0.bottom/68.0.2492.1440/2560.-155.1080.1920@68.0.2492.1440" timestamp="1606223897133" />
+    <state width="2449" height="410" key="GridCell.Tab.0.center" timestamp="1606223897133">
       <screen x="68" y="0" width="2492" height="1440" />
     </state>
-    <state width="2449" height="410" key="GridCell.Tab.0.center/68.0.2492.1440/2560.-155.1080.1920@68.0.2492.1440" timestamp="1606150404589" />
-    <state width="2449" height="410" key="GridCell.Tab.0.left" timestamp="1606150404589">
+    <state width="2449" height="410" key="GridCell.Tab.0.center/68.0.2492.1440/2560.-155.1080.1920@68.0.2492.1440" timestamp="1606223897133" />
+    <state width="2449" height="410" key="GridCell.Tab.0.left" timestamp="1606223897133">
       <screen x="68" y="0" width="2492" height="1440" />
     </state>
-    <state width="2449" height="410" key="GridCell.Tab.0.left/68.0.2492.1440/2560.-155.1080.1920@68.0.2492.1440" timestamp="1606150404589" />
-    <state width="2449" height="410" key="GridCell.Tab.0.right" timestamp="1606150404590">
+    <state width="2449" height="410" key="GridCell.Tab.0.left/68.0.2492.1440/2560.-155.1080.1920@68.0.2492.1440" timestamp="1606223897133" />
+    <state width="2449" height="410" key="GridCell.Tab.0.right" timestamp="1606223897133">
       <screen x="68" y="0" width="2492" height="1440" />
     </state>
-    <state width="2449" height="410" key="GridCell.Tab.0.right/68.0.2492.1440/2560.-155.1080.1920@68.0.2492.1440" timestamp="1606150404590" />
-    <state width="2449" height="410" key="GridCell.Tab.1.bottom" timestamp="1606150404590">
+    <state width="2449" height="410" key="GridCell.Tab.0.right/68.0.2492.1440/2560.-155.1080.1920@68.0.2492.1440" timestamp="1606223897133" />
+    <state width="2449" height="410" key="GridCell.Tab.1.bottom" timestamp="1606223897133">
       <screen x="68" y="0" width="2492" height="1440" />
     </state>
-    <state width="2449" height="410" key="GridCell.Tab.1.bottom/68.0.2492.1440/2560.-155.1080.1920@68.0.2492.1440" timestamp="1606150404590" />
-    <state width="2449" height="410" key="GridCell.Tab.1.center" timestamp="1606150404590">
+    <state width="2449" height="410" key="GridCell.Tab.1.bottom/68.0.2492.1440/2560.-155.1080.1920@68.0.2492.1440" timestamp="1606223897133" />
+    <state width="2449" height="410" key="GridCell.Tab.1.center" timestamp="1606223897133">
       <screen x="68" y="0" width="2492" height="1440" />
     </state>
-    <state width="2449" height="410" key="GridCell.Tab.1.center/68.0.2492.1440/2560.-155.1080.1920@68.0.2492.1440" timestamp="1606150404590" />
-    <state width="2449" height="410" key="GridCell.Tab.1.left" timestamp="1606150404590">
+    <state width="2449" height="410" key="GridCell.Tab.1.center/68.0.2492.1440/2560.-155.1080.1920@68.0.2492.1440" timestamp="1606223897133" />
+    <state width="2449" height="410" key="GridCell.Tab.1.left" timestamp="1606223897133">
       <screen x="68" y="0" width="2492" height="1440" />
     </state>
-    <state width="2449" height="410" key="GridCell.Tab.1.left/68.0.2492.1440/2560.-155.1080.1920@68.0.2492.1440" timestamp="1606150404590" />
-    <state width="2449" height="410" key="GridCell.Tab.1.right" timestamp="1606150404590">
+    <state width="2449" height="410" key="GridCell.Tab.1.left/68.0.2492.1440/2560.-155.1080.1920@68.0.2492.1440" timestamp="1606223897133" />
+    <state width="2449" height="410" key="GridCell.Tab.1.right" timestamp="1606223897133">
       <screen x="68" y="0" width="2492" height="1440" />
     </state>
-    <state width="2449" height="410" key="GridCell.Tab.1.right/68.0.2492.1440/2560.-155.1080.1920@68.0.2492.1440" timestamp="1606150404590" />
+    <state width="2449" height="410" key="GridCell.Tab.1.right/68.0.2492.1440/2560.-155.1080.1920@68.0.2492.1440" timestamp="1606223897133" />
     <state width="2449" height="508" key="GridCell.Tab.2.bottom" timestamp="1605895616941">
       <screen x="68" y="0" width="2492" height="1440" />
     </state>
@@ -275,14 +286,14 @@
       <screen x="68" y="0" width="2492" height="1440" />
     </state>
     <state x="1035" y="461" width="570" height="524" key="StructurePopup/68.0.2492.1440/2560.-155.1080.1920@68.0.2492.1440" timestamp="1605812262721" />
-    <state x="906" y="452" key="Vcs.Push.Dialog.v2" timestamp="1606150395771">
+    <state x="906" y="452" key="Vcs.Push.Dialog.v2" timestamp="1606150964976">
       <screen x="68" y="0" width="2492" height="1440" />
     </state>
-    <state x="906" y="452" key="Vcs.Push.Dialog.v2/68.0.2492.1440/2560.-155.1080.1920@68.0.2492.1440" timestamp="1606150395771" />
-    <state x="1208" y="607" width="316" height="245" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1605811777433">
+    <state x="906" y="452" key="Vcs.Push.Dialog.v2/68.0.2492.1440/2560.-155.1080.1920@68.0.2492.1440" timestamp="1606150964976" />
+    <state x="1208" y="607" width="316" height="245" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1606150981339">
       <screen x="68" y="0" width="2492" height="1440" />
     </state>
-    <state x="1208" y="607" width="316" height="245" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/68.0.2492.1440/2560.-155.1080.1920@68.0.2492.1440" timestamp="1605811777433" />
+    <state x="1208" y="607" width="316" height="245" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/68.0.2492.1440/2560.-155.1080.1920@68.0.2492.1440" timestamp="1606150981339" />
     <state x="1237" y="665" key="com.intellij.database.run.ParametersPanel.Standalone" timestamp="1605554364784">
       <screen x="68" y="0" width="2492" height="1440" />
     </state>

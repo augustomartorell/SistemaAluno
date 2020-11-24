@@ -35,7 +35,6 @@ public class AlunosController {
 
     @GetMapping
     @Cacheable(value = "ListaDeAlunos")
-
     @ApiOperation(value = "Retorna lista de alunos",
                   notes = "Pode retorna lista de alunos selecionados pelos parâmetros nomeAluno ou nomeUsuario",
                   response = AlunoDto.class,
@@ -81,7 +80,7 @@ public class AlunosController {
 
     @PostMapping
     @Transactional
-    @CacheEvict(value = "CadastraAluno",
+    @CacheEvict(value = "ListaDeAlunos",
                 allEntries = true)
     @ApiOperation(value = "Cadastra Aluno",
                   notes = "Cadastra novo aluno a base de dados",
@@ -171,10 +170,8 @@ public class AlunosController {
         String msgRetorno;
         if (alunoOptional.isPresent()) {
             Aluno aluno = alunoOptional.get();
-            Sexo sexo = aluno.getSexo();
-            String nome = aluno.getNomeAluno();
-            if (sexo == Sexo.FEMININO) msgRetorno = "Aluna " + nome + " removida.";
-            else msgRetorno = "Aluno " + nome + " removido.";
+            if (aluno.getSexo() == Sexo.FEMININO) msgRetorno = "Aluna " + aluno.getNomeAluno() + " removida.";
+            else msgRetorno = "Aluno " + aluno.getNomeAluno() + " removido.";
             alunoRepository.deleteById(id);
             return ResponseEntity.ok(msgRetorno);
         }
