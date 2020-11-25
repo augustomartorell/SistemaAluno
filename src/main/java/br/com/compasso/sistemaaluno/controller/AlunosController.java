@@ -4,9 +4,9 @@ import br.com.compasso.sistemaaluno.controller.dto.AlunoDto;
 import br.com.compasso.sistemaaluno.controller.dto.DetalhesAlunoDto;
 import br.com.compasso.sistemaaluno.controller.form.AlunoForm;
 import br.com.compasso.sistemaaluno.controller.form.AtualizaAlunoForm;
-import br.com.compasso.sistemaaluno.modelo.Aluno;
-import br.com.compasso.sistemaaluno.modelo.Sexo;
-import br.com.compasso.sistemaaluno.repository.AlunoRepository;
+import br.com.compasso.sistemaaluno.model.Aluno;
+import br.com.compasso.sistemaaluno.model.Sexo;
+import br.com.compasso.sistemaaluno.service.IAlunoService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -31,7 +31,7 @@ import java.util.Optional;
 public class AlunosController {
 
     @Autowired
-    private AlunoRepository alunoRepository;
+    private IAlunoService alunoService;
 
     @GetMapping
     @Cacheable(value = "ListaDeAlunos")
@@ -53,15 +53,15 @@ public class AlunosController {
             @RequestParam(required = false)
                     String nomeUsuario,
             @PageableDefault(sort = "id")
-                    Pageable paginacao) {
+                    Pageable pageable) {
 
         Page<Aluno> alunos;
-        if (nomeAluno != null) alunos = alunoRepository.findByNomeAlunoContaining(nomeAluno,
-                                                                                  paginacao);
+        if (nomeAluno != null) alunos = alunoService.findByNomeAlunoContaining(nomeAluno,
+                                                                               pageable);
         else if (nomeUsuario != null)
-            alunos = alunoRepository.findByNomeUsuarioContaining(nomeUsuario,
-                                                                 paginacao);
-        else alunos = alunoRepository.findAll(paginacao);
+            alunos = alunoService.findByNomeUsuarioContaining(nomeUsuario,
+                                                              pageable);
+        else alunos = alunoService.findAll(pageable);
         return AlunoDto.converter(alunos);
     }
 
@@ -72,7 +72,7 @@ public class AlunosController {
     public ResponseEntity<DetalhesAlunoDto> detalhar(
             @PathVariable
                     Long id) {
-        Optional<Aluno> alunoOptional = alunoRepository.findById(id);
+        Optional<Aluno> alunoOptional = alunoService.findById(id);
         return alunoOptional.map(aluno -> ResponseEntity.ok(new DetalhesAlunoDto(aluno)))
                             .orElseGet(() -> ResponseEntity.notFound()
                                                            .build());
@@ -99,7 +99,7 @@ public class AlunosController {
             @Valid AlunoForm form,
             UriComponentsBuilder uriBuilder) {
         Aluno aluno = form.converter();
-        alunoRepository.save(aluno);
+        alunoService.save(aluno);
 
         URI uri = uriBuilder.path("/alunos/{id}")
                             .buildAndExpand(aluno.getId())
@@ -132,12 +132,12 @@ public class AlunosController {
                     Long id,
             @RequestBody
                     AtualizaAlunoForm form) {
-        Optional<Aluno> alunoOptional = alunoRepository.findById(id);
+        Optional<Aluno> alunoOptional = alunoService.findById(id);
 
         if (alunoOptional.isPresent()) {
             Aluno aluno = form.atualizar(id,
-                                         alunoRepository);
-            alunoRepository.save(aluno);
+                                         alunoService);
+            alunoService.save(aluno);
             return ResponseEntity.ok()
                                  .body(new AlunoDto(aluno));
         }
@@ -166,13 +166,14 @@ public class AlunosController {
     public ResponseEntity<String> remover(
             @PathVariable
                     Long id) {
-        Optional<Aluno> alunoOptional = alunoRepository.findById(id);
+        Optional<Aluno> alunoOptional = alunoService.findById(id);
         String msgRetorno;
         if (alunoOptional.isPresent()) {
             Aluno aluno = alunoOptional.get();
-            if (aluno.getSexo() == Sexo.FEMININO) msgRetorno = "Aluna " + aluno.getNomeAluno() + " removida.";
+            if (aluno.getSexo() == Sexo.FEMININO)
+                msgRetorno = "Aluna " + aluno.getNomeAluno() + " removida.";
             else msgRetorno = "Aluno " + aluno.getNomeAluno() + " removido.";
-            alunoRepository.deleteById(id);
+            alunoService.deleteById(id);
             return ResponseEntity.ok(msgRetorno);
         }
 

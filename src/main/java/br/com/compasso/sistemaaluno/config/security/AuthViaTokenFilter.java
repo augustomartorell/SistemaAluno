@@ -1,7 +1,7 @@
 package br.com.compasso.sistemaaluno.config.security;
 
-import br.com.compasso.sistemaaluno.modelo.Usuario;
-import br.com.compasso.sistemaaluno.repository.UsuarioRepository;
+import br.com.compasso.sistemaaluno.model.Usuario;
+import br.com.compasso.sistemaaluno.service.IUsuarioService;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -16,12 +16,12 @@ public class AuthViaTokenFilter
         extends OncePerRequestFilter {
 
     private TokenService tokenService;
-    private UsuarioRepository repository;
+    private IUsuarioService usuarioService;
 
     public AuthViaTokenFilter(TokenService tokenService,
-                              UsuarioRepository usuarioRepository) {
+                              IUsuarioService usuarioService) {
         this.tokenService = tokenService;
-        this.repository = usuarioRepository;
+        this.usuarioService = usuarioService;
     }
 
     private String retrieveToken(HttpServletRequest request) {
@@ -34,8 +34,8 @@ public class AuthViaTokenFilter
 
     private void authClient(String token) {
         Long idUsuario = tokenService.getIdUsuario(token);
-        Usuario usuario = repository.findById(idUsuario)
-                                    .get();
+        Usuario usuario = usuarioService.findById(idUsuario)
+                                        .get();
         UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(usuario,
                                                                                            null,
                                                                                            usuario.getAuthorities());

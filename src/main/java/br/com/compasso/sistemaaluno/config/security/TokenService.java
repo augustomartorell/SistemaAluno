@@ -1,6 +1,6 @@
 package br.com.compasso.sistemaaluno.config.security;
 
-import br.com.compasso.sistemaaluno.modelo.Usuario;
+import br.com.compasso.sistemaaluno.model.Usuario;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

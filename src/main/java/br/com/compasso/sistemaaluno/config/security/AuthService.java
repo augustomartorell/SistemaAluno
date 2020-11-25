@@ -1,7 +1,7 @@
 package br.com.compasso.sistemaaluno.config.security;
 
-import br.com.compasso.sistemaaluno.modelo.Usuario;
-import br.com.compasso.sistemaaluno.repository.UsuarioRepository;
+import br.com.compasso.sistemaaluno.model.Usuario;
+import br.com.compasso.sistemaaluno.service.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -15,13 +15,13 @@ public class AuthService
         implements UserDetailsService {
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private IUsuarioService usuarioService;
 
     @Override
     public UserDetails loadUserByUsername(String username)
             throws
             UsernameNotFoundException {
-        Optional<Usuario> usuario = usuarioRepository.findByNome(username);
+        Optional<Usuario> usuario = usuarioService.findByNome(username);
         if (usuario.isPresent())
             return usuario.get();
 

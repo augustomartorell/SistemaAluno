@@ -1,7 +1,6 @@
 package br.com.compasso.sistemaaluno.config.security;
 
-
-import br.com.compasso.sistemaaluno.repository.UsuarioRepository;
+import br.com.compasso.sistemaaluno.service.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,7 +27,7 @@ public class SecurityConfigurations
     private TokenService tokenService;
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private IUsuarioService usuarioService;
 
     @Override
     @Bean
@@ -69,7 +68,7 @@ public class SecurityConfigurations
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
             .addFilterBefore(new AuthViaTokenFilter(tokenService,
-                                                    usuarioRepository),
+                                                    usuarioService),
                              UsernamePasswordAuthenticationFilter.class);
     }
 

@@ -1,6 +1,6 @@
 package br.com.compasso.sistemaaluno.controller.dto;
 
-import br.com.compasso.sistemaaluno.modelo.Usuario;
+import br.com.compasso.sistemaaluno.model.Usuario;
 import org.springframework.data.domain.Page;
 
 public class UsuarioDto {

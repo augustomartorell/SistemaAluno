@@ -1,4 +1,4 @@
-package br.com.compasso.sistemaaluno.modelo;
+package br.com.compasso.sistemaaluno.model;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

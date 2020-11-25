@@ -1,4 +1,4 @@
-package br.com.compasso.sistemaaluno.modelo;
+package br.com.compasso.sistemaaluno.model;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

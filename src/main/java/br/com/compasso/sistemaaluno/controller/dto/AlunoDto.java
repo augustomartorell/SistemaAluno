@@ -1,7 +1,7 @@
 package br.com.compasso.sistemaaluno.controller.dto;
 
-import br.com.compasso.sistemaaluno.modelo.Aluno;
-import br.com.compasso.sistemaaluno.modelo.Sexo;
+import br.com.compasso.sistemaaluno.model.Aluno;
+import br.com.compasso.sistemaaluno.model.Sexo;
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.data.domain.Page;
 

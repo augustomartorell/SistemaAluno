@@ -1,7 +1,7 @@
 package br.com.compasso.sistemaaluno.controller.form;
 
-import br.com.compasso.sistemaaluno.modelo.Aluno;
-import br.com.compasso.sistemaaluno.repository.AlunoRepository;
+import br.com.compasso.sistemaaluno.model.Aluno;
+import br.com.compasso.sistemaaluno.service.IAlunoService;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -62,8 +62,9 @@ public class AtualizaAlunoForm {
     }
 
     public Aluno atualizar(Long id,
-                           @NotNull AlunoRepository alunoRepository) {
-        Aluno aluno = alunoRepository.getOne(id);
+                           @NotNull
+                                   IAlunoService alunoService) {
+        Aluno aluno = alunoService.getOne(id);
 
         aluno.setNomeAluno(this.nomeAluno);
         aluno.setEmail(this.email);

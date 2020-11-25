@@ -1,7 +1,7 @@
 package br.com.compasso.sistemaaluno.controller.form;
 
-import br.com.compasso.sistemaaluno.modelo.Aluno;
-import br.com.compasso.sistemaaluno.modelo.Sexo;
+import br.com.compasso.sistemaaluno.model.Aluno;
+import br.com.compasso.sistemaaluno.model.Sexo;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -27,7 +27,7 @@ public class AlunoForm {
     @NotNull
     @NotEmpty
     @Length(min = 10,
-          max = 254)
+            max = 254)
     private String email;
 
     @Length(min = 8)

@@ -1,9 +1,13 @@
-package br.com.compasso.sistemaaluno.repository;
+package br.com.compasso.sistemaaluno.service;
 
 import br.com.compasso.sistemaaluno.model.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public
-interface UsuarioRepository
+import java.util.Optional;
+
+public interface IUsuarioService
         extends JpaRepository<Usuario, Long> {
+
+    Optional<Usuario> findByNome(String nome);
+
 }

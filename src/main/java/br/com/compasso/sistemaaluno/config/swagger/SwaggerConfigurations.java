@@ -1,6 +1,6 @@
 package br.com.compasso.sistemaaluno.config.swagger;
 
-import br.com.compasso.sistemaaluno.modelo.Usuario;
+import br.com.compasso.sistemaaluno.model.Usuario;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ParameterBuilder;
